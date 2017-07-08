@@ -1,0 +1,45 @@
+#设置应用信息，如应用的名称和版本号
+info:
+  name: eureka-service
+  version: @project.version@
+
+#设置应用端口号
+server:
+  port: 8761
+
+#设置应用名称和开启的profiles
+spring:
+  application:
+    name: eureka-service
+  profiles:
+    active: dev
+
+#security:
+#  user:
+#    name: ${eureka.user.name:szss}
+#    password: ${eureka.user.password:songshu619}
+
+---
+#配置名称
+spring:
+  profiles: dev
+
+#eureka配置，配置环境名称，数据中心名称，以及实例的主机名称，服务不进行自我注册
+eureka:
+  environment: test env
+  datacenter: aliyun hangzhou data center
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
+
+---
+spring:
+  profiles: cluster
+
+eureka:
+  environment: erueka cluster env
+  datacenter: aliyun hangzhou data center

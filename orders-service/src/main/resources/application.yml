@@ -1,0 +1,31 @@
+info:
+  name: eureka client
+  groupId: @project.groupId@
+  artifactId: @project.artifactId@
+  version: @project.version@
+
+server:
+  port: 8001
+#  undertow:
+#    worker-threads: 1
+
+spring:
+  application:
+    name: orders-service
+  profiles:
+    active: dev
+
+---
+spring:
+  profiles: dev
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
+  instance:
+    health-check-url: http://127.0.0.1:8001/health
+
+#users-service:
+#  ribbon:
+#    listOfServers: http://127.0.0.1:8000,http://127.0.0.1:9000

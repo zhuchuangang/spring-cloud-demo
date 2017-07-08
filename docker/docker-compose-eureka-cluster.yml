@@ -1,0 +1,41 @@
+version: "2"
+
+services:
+  eureka-peer01:
+    image: zcg/eureka
+    ports:
+      - 8761:8761
+    hostname: eureka-peer01
+    restart: always
+    environment:
+      - spring.profiles.active=cluster
+      - eureka.client.service-url.defaultZone=http://eureka-peer01:8761/eureka,http://eureka-peer02:8761/eureka,http://eureka-peer03:8761/eureka
+    networks:
+      - managed
+
+  eureka-peer02:
+    image: zcg/eureka
+    ports:
+       - 8762:8761
+    hostname: eureka-peer02
+    restart: always
+    environment:
+      - spring.profiles.active=cluster
+      - eureka.client.service-url.defaultZone=http://eureka-peer01:8761/eureka,http://eureka-peer02:8761/eureka,http://eureka-peer03:8761/eureka
+    networks:
+      - managed
+
+  eureka-peer03:
+    image: zcg/eureka
+    ports:
+       - 8763:8761
+    hostname: eureka-peer03
+    restart: always
+    environment:
+      - spring.profiles.active=cluster
+      - eureka.client.service-url.defaultZone=http://eureka-peer01:8761/eureka,http://eureka-peer02:8761/eureka,http://eureka-peer03:8761/eureka
+    networks:
+      - managed
+
+networks:
+  managed:

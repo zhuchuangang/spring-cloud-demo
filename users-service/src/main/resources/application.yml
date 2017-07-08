@@ -1,0 +1,23 @@
+info:
+  name: eureka client
+  groupId: @project.groupId@
+  artifactId: @project.artifactId@
+  version: @project.version@
+
+server:
+  port: 8000
+
+spring:
+  application:
+    name: users-service
+  profiles:
+    active: dev
+
+---
+spring:
+  profiles: dev
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka
